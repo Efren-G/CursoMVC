@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<br /><br />
+<div class="row">
+    <form id="frm">
+        <div class="col-lg-6 col-lg-offset-3">
+            Usuario
+            <input type="text" name="user" />
+            Pasword
+            <input type="password" name="password" />
+            <input type="submit" class="btn btn-success" value="Entrar" />
+        </div>
+        <div>
+            @Html.ActionLink("Olvidaste tu contraseña?", "StartRecovery")
+        </div>
+
+        <div>Ingrese maestro con admin@gmail.com y admin de contraseña</div>
+    </form>
+</div>
+
+
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+
+        $("#frm").submit(function (e) {
+            e.preventDefault();
+
+            url = "@Url.Content("~/Access/Enter")"
+            parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data) {
+
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                } else {
+                    alert(data)
+                }
+
+            })
+
+        })
+
+    })
+
+</script>
+    }
